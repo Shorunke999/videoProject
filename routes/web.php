@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\authController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [controller::class,'view']);
+Route::post('/authUser', [authcontroller::class,'authMethod']);
+Route::middleware(['auth'])->group(function(){
+    
 });
