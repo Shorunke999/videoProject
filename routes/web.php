@@ -17,5 +17,6 @@ use App\Http\Controllers\authController;
 Route::get('/', [controller::class,'view']);
 Route::post('/authUser', [authcontroller::class,'authMethod']);
 Route::middleware(['auth'])->group(function(){
-    
+        
+    Route::get('/authUser', [authcontroller::class,'viewDashboard']);
 });

@@ -12,8 +12,13 @@ class authController extends Controller
             'email' =>'required|string|email',
             'password' => 'required'
         ]);
-        User::create($validated);
-        Auth::login();
+       $user =  User::create($validated);
+        Auth::login($user);
+        //Auth::user();
+        return inertia('Dashboard');
+    }
+    public function viewDashboard(){
+        Auth::user();
         return inertia('Dashboard');
     }
 }
