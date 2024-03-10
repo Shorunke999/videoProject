@@ -14,6 +14,6 @@ class authController extends Controller
         ]);
         User::create($validated);
         Auth::login();
-        return inertial('Dashboard');
+        return inertia('Dashboard');
     }
 }

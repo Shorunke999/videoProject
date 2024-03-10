@@ -11,6 +11,6 @@ class Controller extends BaseController
     use AuthorizesRequests, ValidatesRequests;
     
     public function view(){
-        return inertial('Registeration');
+        return inertia('Registeration');
     }
 }
