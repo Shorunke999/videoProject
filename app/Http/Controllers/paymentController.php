@@ -10,7 +10,7 @@ class PaymentController extends Controller
     public function redirectToGateway(Request $request){
         try{
             $data = array(
-            "amount" => $request->amount,
+            "amount" => $request->Amount,
             "reference" => Paystack::genTranxRef(),
             "email" => auth()->user()->email,
             "currency" => "NGN",

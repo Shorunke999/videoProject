@@ -38,7 +38,7 @@ export default {
     },
     methods: {
         submit(amount) {
-            router.post('/pay', { amount })
+            router.post('/pay', { Amount:amount })
         }
     }
 }
