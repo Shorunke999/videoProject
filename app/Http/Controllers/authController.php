@@ -18,7 +18,7 @@ class authController extends Controller
         return inertia('Dashboard');
     }
     public function viewDashboard(){
-        Auth::user();
+        Auth::user();  
         return inertia('Dashboard');
     }
 }

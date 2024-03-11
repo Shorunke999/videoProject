@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\authController;
+use App\Http\Controllers\paymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +18,6 @@ use App\Http\Controllers\authController;
 Route::get('/', [controller::class,'view']);
 Route::post('/authUser', [authcontroller::class,'authMethod']);
 Route::middleware(['auth'])->group(function(){
-        
     Route::get('/authUser', [authcontroller::class,'viewDashboard']);
+    Route::get('/payment/{charging}', [paymentController::class,'directToPayment']);
 });
