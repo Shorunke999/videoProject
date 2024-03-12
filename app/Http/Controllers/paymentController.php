@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Paystack;
+use Illuminate\Support\Facades\Redirect;
+
 use Illuminate\Support\Facades\Http;
 
 class PaymentController extends Controller
@@ -17,9 +19,11 @@ class PaymentController extends Controller
                 "email" => auth()->user()->email,
                 "currency" => "NGN",
             ];
-            $redirectUrl = Paystack::getAuthorizationUrl($data)->redirectUrl();
+            //$redirectUrl = Paystack::getAuthorizationUrl($data)->redirectUrl();
             // Return the redirect URL to the frontend
-            return Inertia::location($redirectUrl);
+            //return Inertia::location($redirectUrl);
+            $url = Paystack::getAuthorizationUrl($data)->url;
+            return Redirect::away($url);//->redirectNow();
         } catch(\Exception $e) {
             return Redirect::back()->with(['msg' => $e->getMessage()]);
         }
