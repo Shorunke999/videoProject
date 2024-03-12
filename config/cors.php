@@ -20,6 +20,9 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => ['*'],
+    //'allowed_origins' => ['http://localhost:5173/'],
+
+    'access-control-allow-origin'=>['*'],
 
     'allowed_origins_patterns' => [],
 

@@ -15,7 +15,7 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
-Route::get('/', [controller::class,'view']);
+Route::get('/', [controller::class,'view'])->name('login');
 Route::post('/authUser', [authcontroller::class,'authMethod']);
 Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback']);
 Route::middleware(['auth'])->group(function(){
