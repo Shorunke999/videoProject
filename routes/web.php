@@ -17,9 +17,10 @@ use App\Http\Controllers\PaymentController;
 
 Route::get('/', [controller::class,'view'])->name('login');
 Route::post('/authUser', [authcontroller::class,'authMethod']);
-Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback']);
+Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
 Route::middleware(['auth'])->group(function(){
     Route::get('/authUser', [authcontroller::class,'viewDashboard']);
-    Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway']);
+    Route::post('/pay', [PaymentController::class, 'redirectToGateway']);
+    //Route::get('/pay', [PaymentController::class, 'anotherRedirectToGateway']);
 });
 //https://8f3d-102-89-22-143.ngrok-free.app/payment/callback  callback url

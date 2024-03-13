@@ -5,25 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Paystack;
 use Illuminate\Support\Facades\Redirect;
-
 use Illuminate\Support\Facades\Http;
+use Inertia\Inertia;
 
 class PaymentController extends Controller
 {
     public function redirectToGateway(Request $request)
     {
         try {
-            $data = [
+            $data = array(
                 "amount" => $request->Amount,
                 "reference" => Paystack::genTranxRef(),
                 "email" => auth()->user()->email,
                 "currency" => "NGN",
-            ];
-            //$redirectUrl = Paystack::getAuthorizationUrl($data)->redirectUrl();
-            // Return the redirect URL to the frontend
-            //return Inertia::location($redirectUrl);
-            $url = Paystack::getAuthorizationUrl($data)->url;
-            return Redirect::away($url);//->redirectNow();
+            );
+            $authorizationUrl = Paystack::getAuthorizationUrl($data)->url;
+            return Inertia::location($authorizationUrl);
+        } catch(\Exception $e) {
+            return Redirect::back()->with(['msg' => $e->getMessage()]);
+        }
+    }
+    public function anotherRedirectToGateway()
+    {
+        try {   
+            return Paystack::getAuthorizationUrl()->redirectNow();
         } catch(\Exception $e) {
             return Redirect::back()->with(['msg' => $e->getMessage()]);
         }

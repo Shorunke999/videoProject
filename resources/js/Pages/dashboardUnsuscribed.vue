@@ -24,7 +24,8 @@
 
 <script>
 import DashboardComponent from './DashboardComponent.vue'
-import { router } from '@inertiajs/vue3'
+import { Inertia } from '@inertiajs/inertia';
+
 
 export default {
     components: {
@@ -39,16 +40,12 @@ export default {
     },
     methods: {
         submitPayment(amount) {
-            router.post('/pay', { Amount: amount })
-           /* .then((page) => {
-                // Assuming the response is handled by a callback on the page component
-                // You can access the response data using page.props
-                window.location.href = page.props.redirect_url;
-            })
-            .catch((error) => {
-                console.error('Error submitting payment:', error);
-                // Handle the error (e.g., show a message to the user)
-            });*/
+            Inertia.post('/pay', { Amount: amount }).then(res => {
+                window.location.href = res.data.redirect_url;
+            }).catch(error => {
+                console.error('Payment error:', error);
+                // Handle error
+            });
         }
     }
 }
