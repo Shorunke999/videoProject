@@ -16,7 +16,8 @@ class authController extends Controller
         $registeredUser = User::where('email', $request->email)->first();
         if($registeredUser){
             Auth::login($registeredUser);
-            if($registeredUser->suscribtion()){
+            $aa = suscribtion::where('email', $request->email)->first();
+            if($aa->subscription == true){
                 return inertia('Dashboard');
             }else{
              return inertia('dashboardUnsuscribed');

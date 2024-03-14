@@ -9,7 +9,5 @@ use App\Models\User;
 class suscribtion extends Model
 {
     use HasFactory;
-    public function user(){
-        $this->belongsTo(User::class , 'userId');
-    }
+  
 }

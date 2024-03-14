@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('suscribtions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('userId')->reference('id')->on('User')->onDelete('cascading');
-            $table->string('package');
-            $table->number('amount');
-            $table->timestamp('expiresAt');
+            $table->string('email');
+            $table->string('bank');
+            $table->integer('amount');
+            $table->boolean('subscription')->default(false);
+            $table->string('authorizationCode');
+            $table->string('cardType');
+            $table->timestamp('paidAt');
             $table->timestamps();
         });
     }

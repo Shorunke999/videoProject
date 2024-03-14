@@ -10,11 +10,11 @@
                 <button @click.prevent="submitPayment(1000)" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Subscribe</button>
             </div>
             <div class="flex justify-between items-center mt-2">
-                <div class="justify-left">Monthly Subscription - ${{ monthlyAmount }}/month</div>
+                <div class="justify-left">Monthly Subscription - NGN{{ monthlyAmount }}/month</div>
                 <button @click.prevent="submitPayment(10000)" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Subscribe</button>
             </div>
             <div class="flex justify-between items-center mt-2">
-                <div class="justify-left">Yearly Subscription - ${{ yearlyAmount }}/Year</div>
+                <div class="justify-left">Yearly Subscription - NGN{{ yearlyAmount }}/Year</div>
                 <button @click.prevent="submitPayment(9999)" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Subscribe</button>
             </div>
             <div v-if="$page.props.flash.msg">{{ $page.props.flash.msg }}</div>
