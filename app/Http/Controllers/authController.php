@@ -10,14 +10,14 @@ class authController extends Controller
 {
     public function authMethod(Request $request){
         $validated = $request->validate([
-            'email' =>'required|string|email',
+            'email' =>'required|string|email:unique',
             'password' => 'required'
         ]);
         $registeredUser = User::where('email', $request->email)->first();
         if($registeredUser){
             Auth::login($registeredUser);
             $aa = suscribtion::where('email', $request->email)->first();
-            if($aa->subscription == true){
+            if( $aa!=null && $aa->subscription == true){
                 return inertia('Dashboard');
             }else{
              return inertia('dashboardUnsuscribed');
@@ -30,7 +30,6 @@ class authController extends Controller
       
     }
     public function viewDashboard(){
-        Auth::user();  
         return inertia('dashboardUnsuscribed');
     }
 }

@@ -21,5 +21,6 @@ Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallbac
 Route::middleware(['auth'])->group(function(){
     Route::get('/authUser', [authcontroller::class,'viewDashboard']);
     Route::post('/pay', [PaymentController::class, 'redirectToGateway']);
+    Route::post('/videoUpload',[videoController::class , 'upload']);
 });
 //https://8f3d-102-89-22-143.ngrok-free.app/payment/callback  callback url

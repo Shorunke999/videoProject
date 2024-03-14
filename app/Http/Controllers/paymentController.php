@@ -30,7 +30,8 @@ class PaymentController extends Controller
     {
         $paymentDetails = Paystack::getPaymentData();
         dd($paymentDetails);
-        if($paymentDetails->status){
+        if($paymentDetails->status)
+        {
             suscribtion::updateOrCreate(
                 ['email'=>$paymentDetails->data->customer->email],
                 [
@@ -41,10 +42,8 @@ class PaymentController extends Controller
                 'authorizationCode' => $paymentDetails->data->authorization->authorization_code,
                 'cardType' => $paymentDetails->data->authorization->card_type,
                 'paidAt'=> $paymentDetails->data->paidAt,
-                ]
-        );  
+                ]);  
             return inertia('Dashboard');
-
         }
         // Now you have the payment details,
         // you can store the authorization_code in your db to allow for recurrent subscriptions
