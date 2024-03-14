@@ -20,6 +20,9 @@
       </div>
   
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div v-if="$page.props.flash.msg" class="text-red-400 mt-1 ">
+          {{ $page.props.flash.msg }}
+        </div>
         <form class="space-y-6" @submit.prevent="submit">
           <div>
             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>

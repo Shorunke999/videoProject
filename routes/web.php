@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\videoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,5 +23,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/authUser', [authcontroller::class,'viewDashboard']);
     Route::post('/pay', [PaymentController::class, 'redirectToGateway']);
     Route::post('/videoUpload',[videoController::class , 'upload']);
+    Route::get('/videoPage',[videoController::class, 'view']);
 });
 //https://8f3d-102-89-22-143.ngrok-free.app/payment/callback  callback url

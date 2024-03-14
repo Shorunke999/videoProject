@@ -1,10 +1,10 @@
 <template>
     <div>
         <DashboardComponent>
-            <span>
+            <span class="justify-end" >
                 <button @click="showModal" class="hover:bg-gray-500">Upload new video</button>
             </span> 
-            <div class="flex justify-center text-2xl" v-if="showModalData">
+            <div class="flex justify-center" v-if="showModalData">
                 <div>
                     <label for="title">
                         Video title
@@ -13,6 +13,9 @@
                 </div>
                 <input type="file" @change="submitVideo">
                 <button type="submit">upload video</button>
+            </div>
+            <div>
+
             </div>
         </DashboardComponent>
     </div>
@@ -36,16 +39,19 @@ export default {
         this.showModalData = !this.showModalData
        },
        submitVideo(event){
-            const file = event.target.files[0];
-            const formData = new FormData();
-            formData.append('data',{
-                title: this.Title,
-                video: file
-            }); 
-            router.post('/videoUpload',{
-                formData
-            });
-       }
-        }
+            //const file = event.target.files[0];
+            //const formData = new FormData();
+            //formData.append('data',{
+              //  title: this.Title,
+                //video: file
+            //}); 
+            //router.post('/videoUpload',{
+              //  formData
+            //});
+       }   
+    },
+    mounted:{
+        //call data from api and render them on the page..also get image to use for background
+    }
 }
 </script>

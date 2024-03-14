@@ -22,9 +22,12 @@ class videoController extends Controller
                 'title' => $request->data->title,
                 'path' => $videoPath
             ]);
-            return redirect()->back()->with('msg','upload succesfully');
+            return inertia('Dashboard')->with('msg','upload succesfully');
         }catch(\Exception $e){
             return redirect()->back()->with('msg', $e->getMessage());
         }
+    }
+    public function view(){
+        return inertia('Dashboard');
     }
 }

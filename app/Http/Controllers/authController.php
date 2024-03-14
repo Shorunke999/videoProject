@@ -11,22 +11,27 @@ class authController extends Controller
     public function authMethod(Request $request){
         $validated = $request->validate([
             'email' =>'required|string|email:unique',
-            'password' => 'required'
+            'password' => 'required|string'
         ]);
         $registeredUser = User::where('email', $request->email)->first();
         if($registeredUser){
-            Auth::login($registeredUser);
-            $aa = suscribtion::where('email', $request->email)->first();
-            if( $aa!=null && $aa->subscription == true){
-                return inertia('Dashboard');
+            if($registeredUser->password == $request->password){
+                Auth::login($registeredUser);
+                $aa = suscribtion::where('email', $request->email)->first();
+                if( $aa!=null && $aa->subscription == true){
+                    return inertia('Dashboard');
+                }else{
+                return inertia('dashboardUnsuscribed');
+                }
             }else{
-             return inertia('dashboardUnsuscribed');
+                return inertia('Registeration')->with('msg','invalid password');
             }
         }else{
-            $user =  User::create($validated);
-            Auth::login($user);
-            return inertia('dashboardUnsuscribed');
-        }
+                $user =  User::create($validated);
+                Auth::login($user);
+                return inertia('dashboardUnsuscribed');
+            }
+      
       
     }
     public function viewDashboard(){
