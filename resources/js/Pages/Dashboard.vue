@@ -1,21 +1,23 @@
 <template>
     <div>
         <DashboardComponent>
-            <span class="justify-end" >
-                <button @click="showModal" class="hover:bg-gray-500">Upload new video</button>
-            </span> 
-            <div class="flex justify-center" v-if="showModalData">
+            <div v-if="$page.props.flash.msg" class="bg-green-500 items-center flex justify-center">
+                {{ $page.props.flash.msg }}
+            </div>
+            <div class="justify-center flex mt-3">
+                <button @click="showModal" class="bg-green-500 hover:bg-green-600  text-white px-4 py-2 rounded">
+                    Upload new video
+                </button>
+            </div>
+                
+            <div class="flex justify-center bg-green-400 mt-4 text-black" v-if="showModalData" >
                 <div>
                     <label for="title">
-                        Video title
+                            Video title
                     </label>
                     <input type="text" name="title" v-model="Title">
+                    <input type="file" @change="submitVideo">
                 </div>
-                <input type="file" @change="submitVideo">
-                <button type="submit">upload video</button>
-            </div>
-            <div>
-
             </div>
         </DashboardComponent>
     </div>
@@ -25,13 +27,17 @@
 import DashboardComponent from './DashboardComponent.vue'
 import { router } from '@inertiajs/vue3'
 export default {
+    props:{
+        msg:Object
+    },
     components: {
         DashboardComponent
     },
     data() {
         return {
             showModalData:false,
-            Title:''
+            Title:'',
+            file: null
         }
     },
     methods: {
@@ -39,18 +45,15 @@ export default {
         this.showModalData = !this.showModalData
        },
        submitVideo(event){
-            //const file = event.target.files[0];
-            //const formData = new FormData();
-            //formData.append('data',{
-              //  title: this.Title,
-                //video: file
-            //}); 
-            //router.post('/videoUpload',{
-              //  formData
-            //});
+            const formData = {
+               title: this.Title,
+                video: event.target.files[0]
+            }
+            console.log(formData) 
+           router.post('/videoUpload',formData);
        }   
     },
-    mounted:{
+    mounts:{
         //call data from api and render them on the page..also get image to use for background
     }
 }
