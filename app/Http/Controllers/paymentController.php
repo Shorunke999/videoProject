@@ -8,6 +8,8 @@ use App\Models\suscribtion;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
+use  App\Mail\SuccesfullPayment;
+use App\Jobs\emailJob;
 
 class PaymentController extends Controller
 {
@@ -35,15 +37,16 @@ class PaymentController extends Controller
             suscribtion::updateOrCreate(
                 ['email'=>$paymentDetails->data->customer->email],
                 [
-                'email'=>$paymentDetails->data->customer->email,
+                //'email'=>$paymentDetails->data->customer->email,
                 'bank' => $paymentDetails->data->authorization->bank,
                 'amount'=> $paymentDetails->data->amount,
                 'subscription'=> true,
                 'authorizationCode' => $paymentDetails->data->authorization->authorization_code,
                 'cardType' => $paymentDetails->data->authorization->card_type,
                 'paidAt'=> $paymentDetails->data->paidAt,
-                ]);  
-            return inertia('Dashboard');
+                ]); 
+                emailJob::dispatch($paymentDetails->data);
+                 return inertia('Dashboard');
         }
         // Now you have the payment details,
         // you can store the authorization_code in your db to allow for recurrent subscriptions
