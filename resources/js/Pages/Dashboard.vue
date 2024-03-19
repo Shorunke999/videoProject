@@ -19,16 +19,21 @@
                     <input type="file" @change="submitVideo">
                 </div>
             </div>
+            <div>
+                {{ data }}
+            </div>
+            <div @click="paginate" class="cursor-pointer">next page</div>
         </DashboardComponent>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 import DashboardComponent from './DashboardComponent.vue'
 import { router } from '@inertiajs/vue3'
 export default {
     props:{
-        msg:Object
+
     },
     components: {
         DashboardComponent
@@ -37,7 +42,10 @@ export default {
         return {
             showModalData:false,
             Title:'',
-            file: null
+            file: null,
+            pageNumber:0,
+            data:'',
+            
         }
     },
     methods: {
@@ -51,10 +59,21 @@ export default {
             }
             console.log(formData) 
            router.post('/videoUpload',formData);
-       }   
+       },
+       paginate(){
+            this.pageNumber++;
+            axios.get(`/api/getVideo?page=${this.pageNumber}`)
+            .then(($res)=>{
+                this.data = $res;
+            })
+       }
     },
-    mounts:{
+    mounted() {
+        axios.get(`/api/getVideo?page=${this.pageNumber}`)
+        .then(($res)=>{
+            this.data = $res;
+        })
         //call data from api and render them on the page..also get image to use for background
-    }
+    },
 }
 </script>
