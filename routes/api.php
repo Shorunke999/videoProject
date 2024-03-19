@@ -18,4 +18,8 @@ use App\Http\Controllers\apiController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/getVideo',[apiController::class,'paginate']);
+Route::middleware('authApi')->group(
+    function(){
+        Route::get('/getVideo',[apiController::class,'paginate']);
+    }
+);

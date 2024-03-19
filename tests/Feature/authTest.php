@@ -32,4 +32,9 @@ class authTest extends TestCase
        $response = $this->actingAs($user)->get('/authUser');
        $response->assertStatus(200);
     }
+    public function test_if_httpRequest_to_thirdParty_api(){
+        $user = User::factory()->create();
+        $response= $this->actingAs($user)->get('/api/getVideo');
+        $response->assertStatus(200);
+    }
 }

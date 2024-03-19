@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class apiController extends Controller
 {
     public function paginate(){
         try{
-            //$videoData = Http::get()->paginate();
+            //$videoData = Http::get()->paginate(10);
             return response()->json(
                 [
                     'data' => $videoData
