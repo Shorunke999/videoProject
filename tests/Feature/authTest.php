@@ -27,14 +27,18 @@ class authTest extends TestCase
         $response->assertStatus(200);
     }
     public function test_if_get_authuser_works(){
-       $user = User::factory()->create();
+        $user = $this->newUser();
        //dd($user);
        $response = $this->actingAs($user)->get('/authUser');
        $response->assertStatus(200);
     }
-    public function test_if_httpRequest_to_thirdParty_api(){
-        $user = User::factory()->create();
+    public function test_if_created_middleware_works(){
+        $user = $this->newUser();
         $response= $this->actingAs($user)->get('/api/getVideo');
         $response->assertStatus(200);
+    }
+    private function newUser(){
+        $user =  User::factory()->create();
+        return $user;
     }
 }

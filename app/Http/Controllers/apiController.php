@@ -10,6 +10,7 @@ class apiController extends Controller
     public function paginate(){
         try{
             //$videoData = Http::get()->paginate(10);
+            $videoData = 123;
             return response()->json(
                 [
                     'data' => $videoData
