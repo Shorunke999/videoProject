@@ -40,11 +40,11 @@ export default {
     },
     methods: {
         submitPayment(amount) {
-            Inertia.post('/pay', { Amount: amount }).then(res => {
+            Inertia.post('/pay', { Amount: amount })
+            .then(res => {
                 window.location.href = res.data.redirect_url;
             }).catch(error => {
                 console.error('Payment error:', error);
-                // Handle error
             });
         }
     }
