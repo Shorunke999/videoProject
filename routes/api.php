@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\apiController;
+use App\Http\Controllers\flutterwaveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,4 @@ Route::middleware('authApi')->group(
         Route::get('/getVideo',[apiController::class,'paginate']);
     }
 );
+Route::post('/flutter',[flutterwaveController::class,'process']);

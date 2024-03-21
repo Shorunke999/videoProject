@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\suscribtion;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 class authController extends Controller
 {
@@ -15,7 +16,7 @@ class authController extends Controller
         ]);
         $registeredUser = User::where('email', $request->email)->first();
         if($registeredUser){
-            if($registeredUser->password == $request->password){
+            if(Hash::check($registeredUser->password,$request->password)){
                 Auth::login($registeredUser);
                 $aa = suscribtion::where('email', $request->email)->first();
                 if( $aa!=null && $aa->subscription == true){
@@ -27,7 +28,10 @@ class authController extends Controller
                 return inertia('Registeration')->with('msg','invalid password');
             }
         }else{
-                $user =  User::create($validated);
+                $user =  User::create([
+                    'email'=> $request->email,
+                    'password'=>Hash::make($request->password)
+                ]);
                 Auth::login($user);
                 return inertia('dashboardUnsuscribed');
             }
