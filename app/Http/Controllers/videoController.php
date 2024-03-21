@@ -30,4 +30,7 @@ class videoController extends Controller
     public function view(){
         return inertia('Dashboard');
     }
+    public function play($url){
+        return inertia('videoPlayer',['url' => $url]);
+    }
 }

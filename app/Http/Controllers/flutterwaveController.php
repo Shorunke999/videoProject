@@ -18,10 +18,11 @@ class flutterwaveController extends Controller
             $customHandler = new PaymentHandler();
             $client = new Flutterwave();
             $modalType = Modal::POPUP; // Modal::POPUP or Modal::STANDARD
-            $controller = new BasePaymentController($client, $customHandler, $modalType);
-            //$request->merge(['redirect_url' => $request->root() . $request->getPathInfo()]);
-            return response()->json(['data'=>$request->all()]);
-            dd($request->all());
+            $controller = new PaymentController($client, $customHandler, $modalType);
+            $request->merge(['redirect_url' => $request->root().$request->getPathInfo()]);
+            return response()->json([
+                $request
+            ]);
             $controller->process($request->all());
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

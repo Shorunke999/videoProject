@@ -42,8 +42,7 @@ class authTest extends TestCase
         $response->assertStatus(200);
     }
     public function test_flutterwaveEndpoint(){
-       $response = $this->post('/api/flutter',
-        [
+        $request =    [
             "amount"=> "The amount required to be charged. (*)",
             "currency"=> "The currency to charge in. (*)",
             "first_name"=> "The first name of the customer. (*)",
@@ -53,8 +52,10 @@ class authTest extends TestCase
             "success_url"=> "The url to redirect customer to after successful payment.",
             "failure_url"=> "The url to redirect customer to after a failed payment.",
             "tx_ref"=>"The unique transaction identifier. if ommited the apiclient would generate one"
-        ]);
+        ];
+       $response = $this->post('/api/flutter',$request);
         $response->assertStatus(200);
+       $response->assertSee('redirect_url');
     }
     private function newUser(){
         $user =  User::factory()->create();
