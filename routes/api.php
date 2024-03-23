@@ -25,3 +25,6 @@ Route::middleware('authApi')->group(
     }
 );
 Route::post('/flutter',[flutterwaveController::class,'process']);
+https://0752-102-88-82-126.ngrok-free.app/callback
+
+Route::get('/callback',[flutterwaveController::class,'callback'])->name('callback');
