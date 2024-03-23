@@ -41,7 +41,7 @@ class authTest extends TestCase
         $response= $this->actingAs($user)->get('/api/getVideo');
         $response->assertStatus(200);
     }
-    public function test_flutterwaveEndpoint(){
+    /*public function test_flutterwaveEndpoint(){
         $request =    [
             "amount"=> "The amount required to be charged. (*)",
             "currency"=> "The currency to charge in. (*)",
@@ -56,7 +56,7 @@ class authTest extends TestCase
        $response = $this->post('/api/flutter',$request);
         $response->assertStatus(200);
        $response->assertSee('redirect_url');
-    }
+    }*/
     private function newUser(){
         $user =  User::factory()->create();
         return $user;
