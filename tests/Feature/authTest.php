@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
+use EdwardMuss\Rave\Facades\Rave as Flutterwave;
 
 class authTest extends TestCase
 {
@@ -20,8 +21,6 @@ class authTest extends TestCase
             'email' => $user->email,
             'password' => $user->password
         ]);
-        //$response->assertDatabaseHas('users',['email'=> $user->email]);
-        //$response->assertDatabaseHas('suscribtions',['email'=> $user->email]);
         $response->assertStatus(200);
         //$response->assertStatus(302);
     }
@@ -57,6 +56,14 @@ class authTest extends TestCase
         $response->assertStatus(200);
        $response->assertSee('redirect_url');
     }*/
+    public function test_flutter_api_endpoint(){
+        // Enter the details of the payment
+        //$user = $this->newUser();
+        //$response = $this->actingAs($user)->post('api/flutter',['Amount'=>300]);
+        //$payment = 
+        //dd($payment = Flutterwave::initializePayment($data))
+        //$response->assertStatus(200);
+    }
     private function newUser(){
         $user =  User::factory()->create();
         return $user;

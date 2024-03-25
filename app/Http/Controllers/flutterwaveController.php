@@ -12,18 +12,18 @@ class flutterwaveController extends Controller
         try {
                 //This generates a payment reference
             $reference = Flutterwave::generateReference();
-
+            $user = auth()->user();
             // Enter the details of the payment
             $data = [
                 'payment_options' => 'card,banktransfer',
-                'amount' => $request->amount,
-                'email' => $request->email,
+                'amount' => $request->Amount,
+                'email' => $user->email,
                 'tx_ref' => $reference,
                 'currency' => "KES",
                 'redirect_url' => route('callback'),
                 'customer' => [
-                    'email' => $request->email,
-                    "phone_number" => $request->phone,
+                    'email' => $user->email,
+                    "phone_number" =>null,
                     "name" => null
                 ],
 
@@ -33,7 +33,7 @@ class flutterwaveController extends Controller
                 ]
             ];
 
-            $payment = Flutterwave::initializePayment($data);
+            //$payment = Flutterwave::initializePayment($data);
 
 
             if ($payment['status'] !== 'success') {

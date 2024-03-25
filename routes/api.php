@@ -22,9 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('authApi')->group(
     function(){
         Route::get('/getVideo',[apiController::class,'paginate']);
+        Route::post('/flutter',[flutterwaveController::class,'process']);
     }
 );
-Route::post('/flutter',[flutterwaveController::class,'process']);
+Route::get('/callback',[flutterwaveController::class,'callback'])->name('callback');
 https://0752-102-88-82-126.ngrok-free.app/callback
 
-Route::get('/callback',[flutterwaveController::class,'callback'])->name('callback');

@@ -15,45 +15,45 @@ class authController extends Controller
             'email' =>'required|string|email:unique',
             'password' => 'required|string'
         ]);
+        $registeredUser = User::where('email', $request->email)->first();
 
-        $this->auth_Method($request);
+        if($registeredUser){
+
+            if(Hash::check($request->password,$registeredUser->password)){
+
+                Auth::login($registeredUser);
+
+                $aa = suscribtion::where('email', $request->email)->first();
+
+                if( $aa!=null && $aa->subscription == true){
+
+                    return inertia('Dashboard');
+                }else{
+                    return inertia('dashboardUnsuscribed');
+                }
+            }else{
+                return inertia('Registeration')->with('msg','invalid password');
+            }
+        }else{
+                $user =  User::create([
+                    'email'=> $request->email,
+                    'password'=>Hash::make($request->password)
+                ]);
+
+                Auth::login($user);
+                //dispatch mail to user
+                //dd('meme');
+                return inertia('dashboardUnsuscribed');
+            }
+
        
     }
     public function viewDashboard(){
 
         return inertia('dashboardUnsuscribed');
     }
-    private function auth_Method(Request $request){
-            $registeredUser = User::where('email', $request->email)->first();
-
-            if($registeredUser){
-
-                if(Hash::check($registeredUser->password,$request->password)){
-
-                    Auth::login($registeredUser);
-
-                    $aa = suscribtion::where('email', $request->email)->first();
-
-                    if( $aa!=null && $aa->subscription == true){
-
-                        return inertia('Dashboard');
-                    }else{
-                        return inertia('dashboardUnsuscribed');
-                    }
-                }else{
-                    return inertia('Registeration')->with('msg','invalid password');
-                }
-            }else{
-                    $user =  User::create([
-                        'email'=> $request->email,
-                        'password'=>Hash::make($request->password)
-                    ]);
-
-                    Auth::login($user);
-                    //dispatch mail to user
-                    return inertia('dashboardUnsuscribed');
-                }
-        
-        
+    public function Dashing()
+    {
+      return inertia('Dashboard');   
     }
 }
