@@ -19,8 +19,10 @@ use App\Http\Controllers\videoController;
 Route::get('/', [controller::class,'view'])->name('login');
 Route::post('/authUser', [authcontroller::class,'authMethod']);
 Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
+
+Route::get('/authUser', [authcontroller::class,'viewDashboard']);
 Route::middleware(['auth'])->group(function(){
-    Route::get('/authUser', [authcontroller::class,'viewDashboard']);
+    //Route::get('/authUser', [authcontroller::class,'viewDashboard']);
     Route::post('/pay', [PaymentController::class, 'redirectToGateway']);
     Route::post('/videoUpload',[videoController::class , 'upload']);
     Route::get('/videoPage',[videoController::class, 'view']);

@@ -1,33 +1,33 @@
 <template>
     <div>
         <DashboardComponent>
-            <div v-if="Modal ==false">
+            <div v-if="Modal ==false" class="mt-4 ">
                 <div class="flex justify-center text-2xl">
                     Select subscription package
                 </div>
-                <div class="flex justify-between items-center mt-16">
+                <div class="flex justify-between items-center mt-8 ">
                     <span class="mr-2">Weekly Subscription - NGN{{ weeklyAmount }}/week</span>
                     <span class="text-gray-500">Other details here</span>
-                    <button @click.prevent="modalVisibility(1000)" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Subscribe</button>
+                    <button @click.prevent="modalVisibility(1000)" class="bg-indigo-500  text-white px-4 py-2 rounded">Subscribe</button>
                 </div>
                 <div class="flex justify-between items-center mt-2">
                     <div class="justify-left">Monthly Subscription - NGN{{ monthlyAmount }}/month</div>
-                    <button @click.prevent="modalVisibility(10000)" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Subscribe</button>
+                    <button @click.prevent="modalVisibility(10000)" class="bg-indigo-500  text-white px-4 py-2 rounded">Subscribe</button>
                 </div>
                 <div class="flex justify-between items-center mt-2">
                     <div class="justify-left">Yearly Subscription - NGN{{ yearlyAmount }}/Year</div>
-                    <button @click.prevent="modalVisibility(9999)" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Subscribe</button>
+                    <button @click.prevent="modalVisibility(9999)" class="bg-indigo-500  text-white px-4 py-2 rounded">Subscribe</button>
                 </div>
                 <div v-if="$page.props.flash.msg">{{ $page.props.flash.msg }}</div>
             </div>
-            <div v-if="Modal" class="flex justify-end">
+            <div v-if="Modal" class="block justify-end mt-12">
                 <div @click ="paystack" class="cursor-pointer">
                     <p>Paystack</p>
                 </div>
                 <div @click ="FlutterWave" class="cursor-pointer">
                     <p>FlutterWave</p>
                 </div>
-                <button @click="cancelModal" class="bg-green-500">Exit payment</button>
+                <button @click="cancelModal" class="rounded bg-indigo-500">Exit payment</button>
             </div>    
         </DashboardComponent>
     </div>
