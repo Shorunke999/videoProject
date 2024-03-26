@@ -7,10 +7,9 @@
                 </div>
                 <div class="flex justify-between items-center mt-8 ">
                     <span class="mr-2">Weekly Subscription - NGN{{ weeklyAmount }}/week</span>
-                    <span class="text-gray-500">Other details here</span>
                     <button @click.prevent="modalVisibility(1000)" class="bg-indigo-500  text-white px-4 py-2 rounded">Subscribe</button>
                 </div>
-                <div class="flex justify-between items-center mt-2">
+                <div class="flex justify-between items-center mt-2 ">
                     <div class="justify-left">Monthly Subscription - NGN{{ monthlyAmount }}/month</div>
                     <button @click.prevent="modalVisibility(10000)" class="bg-indigo-500  text-white px-4 py-2 rounded">Subscribe</button>
                 </div>

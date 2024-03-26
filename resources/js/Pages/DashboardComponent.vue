@@ -11,16 +11,19 @@
           </ul>
         </div>
         <div>
-          <button class=" bg-gray-500 px-5 py-2 rounded-full hover:bg-gray-500"> Sign in</button>
+          <button class=" bg-gray-500 px-5 py-2 rounded-full hover:bg-gray-500"> Logout</button>
         </div>
 
       </nav>
     </header>
     <body>
-      <div  class="flex justify-center bg-gray-200">
+      <div  class="flex justify-center bg-gray-200 h-screen ">
         <slot></slot>
       </div>
     </body>
+    <footer>
+      
+    </footer>
   </div>
 </template> 
  <script setup>
